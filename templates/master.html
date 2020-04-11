@@ -10,12 +10,25 @@
     <style>
     </style>
     <script>
-        function load(page, elem, alink){
-            window.history.pushState(page, page, '/' + page);
-            $.get( "/page/" + page, function( data ) {
-                $( elem ).html( data );
-                });
-            };
+        function load(page, elem = '#content'){
+            if (elem == '#content'){
+                window.history.pushState(page, page, '/' + page);
+                $.get( "/page/" + page, function( data ) {
+                    $( elem ).html( data );
+                    });
+                }
+            else if (elem == '#modal') {
+                $.get( "/modal/" + page, function( data ) {
+                    $( elem ).html( data );
+                    });
+                };
+        }
+
+        function closeModal(){
+            $('#modal').html('');
+        }
+
+
     </script>
 </head>
 <body>
@@ -33,11 +46,11 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" onclick="load('home', '#content')">
+                <a class="navbar-item" onclick="load('home')">
                     Home
                 </a>
         
-                <a class="navbar-item" onclick="load('documentation', '#content')">
+                <a class="navbar-item" onclick="load('documentation')">
                     Documentation
                 </a>
         
@@ -47,17 +60,17 @@
                     </a>
             
                     <div class="navbar-dropdown">
-                    <a class="navbar-item" onclick="load('about', '#content')">
+                    <a class="navbar-item" onclick="load('about')">
                         About
                     </a>
-                    <a class="navbar-item" onclick="load('jobs', '#content')">
+                    <a class="navbar-item" onclick="load('jobs')">
                         Jobs
                     </a>
-                    <a class="navbar-item" onclick="load('contact', '#content')">
+                    <a class="navbar-item" onclick="load('contact')">
                         Contact
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item" onclick="load('thisisnotanactualpage', '#content')">
+                    <a class="navbar-item" onclick="load('thisisnotanactualpage')">
                         Page Not Found (FOR TESTING)
                     </a>
                     </div>
@@ -87,10 +100,9 @@
                 } else {
                     $(this).innerHTML = load(route, '#content');
                 }
-                
             })
         </script>
-
     </div>
+    <div id="modal"></div>
 </body>
 </html>

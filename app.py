@@ -7,6 +7,7 @@ Notes:
 import sys
 
 from flask import Flask, render_template, abort
+from jinja2.exceptions import TemplateNotFound
 
 app = Flask(__name__)
 
@@ -23,7 +24,14 @@ def page(route):
 def half(route):
     try:
         return render_template(route + ".html")
-    except:
+    except TemplateNotFound:
+        abort(404) 
+
+@app.route("/modal/<route>")
+def modal(route):
+    try:
+        return render_template('/modal/' + route + ".html")
+    except TemplateNotFound:
         abort(404) 
 
 @app.errorhandler(404)
