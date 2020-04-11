@@ -1,6 +1,6 @@
 """
-Project: Inventory Application
-Description: 
+Project: Flask-MasterWorkflowExample
+Description: See project readme. 
 Notes:
 """
 #==============================Imports=======================================
