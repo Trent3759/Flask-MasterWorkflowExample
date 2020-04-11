@@ -1,0 +1,1 @@
+This project is to display the use of a master workflow page using Flask. Coded so that refreshing the page does not lose reference to the current page you are on. Dynamic so that pages can be added easily by adding the HTML file to the templates folder, and call the function in an 'onclick' on the link. 
