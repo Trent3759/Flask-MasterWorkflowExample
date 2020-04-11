@@ -6,16 +6,11 @@ Notes:
 #==============================Imports=======================================
 import sys
 
-from flask import Flask, render_template, request as flask_request, make_response, redirect, url_for, abort
+from flask import Flask, render_template, abort
 
 app = Flask(__name__)
 
-#==========================Global Variables==================================
-
-ip_address = "0.0.0.0"
-
-app = Flask(__name__)
-
+#==============================Routes=======================================
 @app.route("/", methods = ["GET"])
 def index():
 	return render_template("master.html")
@@ -38,6 +33,6 @@ def not_found(e):
 #==========================Main========================================
 
 def main():
-		app.run(host='',port=8080)
+	app.run(host='',port=8080)
 if(__name__ == "__main__"):
-		main()
+	main()
