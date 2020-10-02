@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Master Workflow Test</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="{{ url_for('static',filename='script.js')}}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
     </style>
     <script>
-        function load(page, elem = '#content'){
+        function load(page, elem = '#content',callback){
             if (elem == '#content'){
                 window.history.pushState(page, page, '/' + page);
                 $.get( "/page/" + page, function( data ) {
@@ -22,6 +23,9 @@
                     $( elem ).html( data );
                     });
                 };
+            
+
+            if (callback) callback();
         }
 
         function closeModal(){
@@ -32,13 +36,13 @@
     </script>
 </head>
 <body>
-    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation" style="position: absolute; width: 100%;">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
                 <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
             </a>
         
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
@@ -46,11 +50,11 @@
         </div>
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" onclick="load('home')">
+                <a class="navbar-item" onclick="load('home',callback=myFunction())">
                     Home
                 </a>
         
-                <a class="navbar-item" onclick="load('documentation')">
+                <a class="navbar-item" onclick="load('documentation',callback=myFunction())">
                     Documentation
                 </a>
         
@@ -60,13 +64,13 @@
                     </a>
             
                     <div class="navbar-dropdown">
-                    <a class="navbar-item" onclick="load('about')">
+                    <a class="navbar-item" onclick="load('about',callback=myFunction())">
                         About
                     </a>
-                    <a class="navbar-item" onclick="load('jobs')">
+                    <a class="navbar-item" onclick="load('jobs',callback=myFunction())">
                         Jobs
                     </a>
-                    <a class="navbar-item" onclick="load('contact')">
+                    <a class="navbar-item" onclick="load('contact',callback=myFunction())">
                         Contact
                     </a>
                     <hr class="navbar-divider">
